@@ -4,7 +4,7 @@ import { purpleTheme } from './';
 
 export const AppTheme = ({ children }) => {
   return (
-    <ThemeProvider theme={purpleTheme}>
+    <ThemeProvider theme={ purpleTheme }>
       <CssBaseline />
       { children }
     </ThemeProvider>
