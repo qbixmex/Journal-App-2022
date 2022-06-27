@@ -19,12 +19,12 @@ export const LoginPage = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     dispatch( checkingAuthentication( email, password ) );
-    onResetForm();
+    // onResetForm();
   };
 
   const onGoogleSignIn = () => {
-    dispatch( startGoogleSignIn( email, password ) );
-    onResetForm();
+    dispatch( startGoogleSignIn() );
+    // onResetForm();
   };
 
   return (
