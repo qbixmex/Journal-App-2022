@@ -29,7 +29,7 @@ export const startGoogleSignIn = () => {
     const result = await signInWithGoogle();
 
     if (!result.ok) {
-      return dispatch( logout( result.errorMessage ) );
+      return dispatch( logout({ errorMessage: result.errorMessage }) );
     }
 
     delete result.ok;
@@ -48,7 +48,7 @@ export const startCreatingUserWithEmailAndPassword = ({ displayName, email, pass
     const result = await registerUserWithEmailPassword({ displayName, email, password });
 
     if ( !result.ok ) {
-      return dispatch( logout( result.errorMessage ) );
+      return dispatch( logout({ errorMessage: result.errorMessage }));
     }
 
     delete result.ok;
