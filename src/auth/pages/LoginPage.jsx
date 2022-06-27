@@ -8,28 +8,26 @@ import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
 import { checkingAuthentication, startGoogleSignIn } from '../../store/auth';
 
+const initialState = { email: '', password: '' };
+
 export const LoginPage = () => {
 
   const { status } = useSelector( state => state.auth );
 
   const dispatch = useDispatch();
 
-  const { email, password, formState, onInputChange, onResetForm } = useForm({
-    email: 'daniel.gb@globant.com',
-    password: '0123456789'
-  });
+  const { email, password, onInputChange, onResetForm } = useForm( initialState );
 
   const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
   const onSubmit = (event) => {
     event.preventDefault();
     dispatch( checkingAuthentication( email, password ) );
-    // onResetForm();
+    onResetForm();
   };
 
   const onGoogleSignIn = () => {
     dispatch( startGoogleSignIn() );
-    // onResetForm();
   };
 
   return (
