@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material";
@@ -8,21 +8,39 @@ import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
 import { startLoginWithEmailAndPassword, startGoogleSignIn } from '../../store/auth';
 
-const initialState = { email: 'moonwalk@thriller.com', password: '0123' };
+const initialState = { email: '', password: '' };
+
+const formValidations = {
+  email: [
+    (value) => value.includes('@'),
+    'Email must have a @ character !'
+  ],
+  password: [
+    (value) => value.length >= 8,
+    'Password must be greater than 8 characters !'
+  ],
+};
 
 export const LoginPage = () => {
+
+  const dispatch = useDispatch();
 
   const { status, errorMessage } = useSelector(state => state.auth);
   const isCheckingAuthentication = useMemo( () => status === 'checking', [status] );
 
-  const dispatch = useDispatch();
+  const {
+    formState, email, password, onInputChange,
+    isFormValid, emailValid, passwordValid
+  } = useForm( initialState, formValidations );
 
-  const { email, password, onInputChange } = useForm( initialState );
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const isAuthenticating = useMemo(() => status === 'checking', [status]);
 
   const onSubmit = (event) => {
     event.preventDefault();
+    setFormSubmitted(true);
+    if ( !isFormValid ) return;
     dispatch( startLoginWithEmailAndPassword( email, password ) );
   };
 
@@ -44,6 +62,9 @@ export const LoginPage = () => {
               fullWidth
               value={ email }
               onChange={ onInputChange }
+              autoComplete='off'
+              error={ !!emailValid && formSubmitted }
+              helperText={ emailValid && formSubmitted && emailValid }
             />
           </Grid>
 
@@ -56,6 +77,9 @@ export const LoginPage = () => {
               fullWidth
               value={ password }
               onChange={ onInputChange }
+              autoComplete='off'
+              error={ !!passwordValid && formSubmitted }
+              helperText={ passwordValid && formSubmitted && passwordValid }
             />
 
           </Grid>
