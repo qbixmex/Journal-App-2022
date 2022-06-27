@@ -42,10 +42,18 @@ export const startGoogleSignIn = () => {
 
 export const startCreatingUserWithEmailAndPassword = ({ displayName, email, password }) => {
   return async ( dispatch ) => {
+
     dispatch( checkingCredentials() );
 
-    const response = await registerUserWithEmailPassword({ displayName, email, password });
+    const result = await registerUserWithEmailPassword({ displayName, email, password });
 
-    console.log( response );
+    if ( !result.ok ) {
+      return dispatch( logout( result.errorMessage ) );
+    }
+
+    delete result.ok;
+
+    dispatch( login( result ) );
+
   };
 };
