@@ -35,8 +35,6 @@ export const LoginPage = () => {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const isAuthenticating = useMemo(() => status === 'checking', [status]);
-
   const onSubmit = (event) => {
     event.preventDefault();
     setFormSubmitted(true);
