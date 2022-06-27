@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Button, Grid, Link, TextField, Typography } from "@mui/material";
 
@@ -5,25 +6,42 @@ import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
 
 const initialState = {
-  displayName: 'Roberto Gomez Bolaños (chespirito)',
-  email: 'chavo8@vencindad.com.mx',
-  password: 'semechispoteo'
+  displayName: '',
+  email: '',
+  password: ''
+};
+
+const formValidations = {
+  displayName: [
+    (value) => value.length >= 3,
+    'Full Name must be greater than 3 characters !'
+  ],
+  email: [
+    (value) => value.includes('@'),
+    'Email must have a @ character !'
+  ],
+  password: [
+    (value) => value.length >= 8,
+    'Password must be greater than 8 characters !'
+  ],
 };
 
 export const RegisterPage = () => {
 
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const {
-    displayName, email, password, onInputChange, onResetForm
-  } = useForm( initialState );
+    displayName, email, password, onInputChange, onResetForm,
+    isFormValid, displayNameValid, emailValid, passwordValid
+  } = useForm( initialState, formValidations );
 
   const onSubmit = ( event ) => {
+
     event.preventDefault();
 
-    console.log({
-      displayName,
-      email,
-      password
-    });
+    setFormSubmitted(true);
+
+    console.log({ displayName, email, password });
 
   }
 
@@ -34,40 +52,46 @@ export const RegisterPage = () => {
 
           <Grid item xs={ 12 } mb={ 2 }>
             <TextField
-              label="display name"
               name="displayName"
+              label="Full Name"
               type="text"
-              placeholder="write your full name"
+              placeholder="Write your full name"
               fullWidth
               value={ displayName }
               onChange={ onInputChange }
               autoComplete='off'
+              error={ !!displayNameValid && formSubmitted }
+              helperText={ displayNameValid && formSubmitted && displayNameValid }
             />
           </Grid>
 
           <Grid item xs={ 12 } mb={ 2 }>
             <TextField
-              label="email"
               name="email"
+              label="Email"
               type="email"
-              placeholder="email"
+              placeholder="Write your email"
               fullWidth
               value={ email }
               onChange={ onInputChange }
               autoComplete='off'
+              error={ !!emailValid && formSubmitted }
+              helperText={ emailValid && formSubmitted && emailValid }
             />
           </Grid>
 
           <Grid item xs={ 12 } mb={ 2 }>
             <TextField
               name="password"
-              label="password"
+              label="Password"
               type="password"
-              placeholder="password"
+              placeholder="Write your password"
               fullWidth
               value={ password }
               onChange={ onInputChange }
               autoComplete='off'
+              error={ !!passwordValid && formSubmitted }
+              helperText={ passwordValid && formSubmitted && passwordValid }
             />
 
           </Grid>
