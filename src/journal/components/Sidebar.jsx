@@ -1,15 +1,19 @@
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
 import TurnedInNot from '@mui/icons-material/TurnedInNot';
 
 export const SideBar = ({ drawerWidth }) => {
+
+  const { displayName } = useSelector(({ auth }) => auth );
+
   return (
     <Box
       component='nav'
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
     >
       <Drawer
-        variant='permanent' // Could be: temporary
+        variant='permanent'
         open
         sx={{
           display: { xs: 'block' },
@@ -19,7 +23,7 @@ export const SideBar = ({ drawerWidth }) => {
 
         <Toolbar>
           <Typography variant='h6' noWrap component='div'>
-            Daniel
+            { displayName }
           </Typography>
         </Toolbar>
 
