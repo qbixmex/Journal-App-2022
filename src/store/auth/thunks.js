@@ -28,8 +28,13 @@ export const startGoogleSignIn = () => {
     // Result from Google
     const result = await signInWithGoogle();
 
-    console.log( result );
+    if (!result.ok) {
+      return dispatch( logout( result.errorMessage ) );
+    }
 
-    // dispatch( login() );
+    delete result.ok;
+
+    dispatch( login( result ) );
+
   }
 };
