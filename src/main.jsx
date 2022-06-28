@@ -12,6 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={ store }>
       <BrowserRouter>
         <JournalApp />
+        <h1>Journal App</h1>
       </BrowserRouter>
     </Provider>
   // </React.StrictMode>
