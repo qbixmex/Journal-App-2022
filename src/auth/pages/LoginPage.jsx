@@ -29,7 +29,7 @@ export const LoginPage = () => {
   const isCheckingAuthentication = useMemo( () => status === 'checking', [status] );
 
   const {
-    formState, email, password, onInputChange,
+    email, password, onInputChange,
     isFormValid, emailValid, passwordValid
   } = useForm( initialState, formValidations );
 

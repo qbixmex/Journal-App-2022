@@ -6,6 +6,9 @@ export const useForm = (initialState = {}, formValidations = {}) => {
 
   useEffect(() => createValidators(), [formState]);
 
+  // This effect change Note View if initialForm change
+  useEffect(() => setFormState(initialState), [initialState]);
+
   const isFormValid = useMemo(() => {
     for ( const formField in formValidation ) {
       if (formValidation[formField] !== null) return false;
@@ -13,10 +16,6 @@ export const useForm = (initialState = {}, formValidations = {}) => {
     return true;
   }, [ formValidation ]);
 
-  /**
-   * @param {{ target: { name: string, value: string } }} event
-   * @returns { void }
-   */
   const onInputChange = ({ target: { name = '', value = '' } }) => {
     setFormState({ ...formState, [name]: value });
   };
