@@ -1,13 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 
-export const useForm = (initialState = {}, formValidations = {}) => {
-  const [ formState, setFormState ] = useState(initialState);
+export const useForm = (initialForm = {}, formValidations = {}) => {
+
+  const [ formState, setFormState ] = useState( initialForm );
   const [ formValidation, setFormValidation ] = useState({});
 
-  useEffect(() => createValidators(), [formState]);
+  useEffect(() => {
+    createValidators()
+  }, [ formState ]);
 
   // This effect change Note View if initialForm change
-  useEffect(() => setFormState(initialState), [initialState]);
+  useEffect(() => {
+    setFormState(initialForm)
+  }, [ initialForm ]);
 
   const isFormValid = useMemo(() => {
     for ( const formField in formValidation ) {
@@ -21,7 +26,7 @@ export const useForm = (initialState = {}, formValidations = {}) => {
   };
 
   const onResetForm = () => {
-    setFormState(initialState);
+    setFormState(initialForm);
   };
 
   const createValidators = () => {
