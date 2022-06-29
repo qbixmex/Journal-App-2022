@@ -1,14 +1,14 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { SaveOutlined } from "@mui/icons-material";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { SaveOutlined, UploadOutlined } from "@mui/icons-material";
+import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import { ImageGallery } from "../components";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 import { useForm } from "../../hooks";
-import { setActiveNote, startSaveNote } from "../../store/journal";
+import { setActiveNote, startSaveNote, startUploadingFiles } from "../../store/journal";
 
 export const NoteView = () => {
 
@@ -22,6 +22,8 @@ export const NoteView = () => {
     const newDate = new Date( date );
     return newDate.toUTCString();
   }, [ date ]);
+
+  const fileInputReference = useRef();
 
   useEffect(() => {
     dispatch(setActiveNote(formState));
@@ -37,6 +39,13 @@ export const NoteView = () => {
     dispatch( startSaveNote() );
   };
 
+  const onFileInputChange = ({ target }) => {
+    if ( target.files === 0 ) return;
+
+    // dispatch( startUploadingFiles( target.files ) );
+    console.log('Uploading files');
+  };
+
   return (
     <Grid container
       className='animate__animated animate__fadeIn animate__faster'
@@ -50,9 +59,25 @@ export const NoteView = () => {
       </Grid>
 
       <Grid item>
+        <input
+          ref={ fileInputReference }
+          type="file"
+          multiple
+          onChange={ onFileInputChange }
+          style={{ display: 'none' }}
+        />
+
+        <IconButton
+          color='primary'
+          disabled={ isSaving }
+          onClick={ () => fileInputReference.current.click() }
+        >
+          <UploadOutlined />
+        </IconButton>
+
         <Button
           color='primary'
-          variant="outlined"
+          variant="text"
           sx={{ padding: 1 }}
           onClick={ onSaveNote }
           disabled={ isSaving }
