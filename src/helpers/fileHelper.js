@@ -16,19 +16,17 @@ export const fileUpload = async ( file ) => {
       body: formData,
     });
 
-    console.log( response );
-
     if ( !response.ok ) throw new Error('Could not upload file');
 
     const cloudResponse = await response.json();
 
-    console.log( cloudResponse );
-
     return cloudResponse.secure_url;
 
   } catch( error ) {
+
     console.error( 'error' );
     throw new Error( error.message );
+
   }
 
 };
