@@ -40,10 +40,11 @@ export const NoteView = () => {
   };
 
   const onFileInputChange = ({ target }) => {
+
     if ( target.files === 0 ) return;
 
-    // dispatch( startUploadingFiles( target.files ) );
-    console.log('Uploading files');
+    dispatch( startUploadingFiles( target.files ) );
+    
   };
 
   return (

@@ -44,15 +44,11 @@ export const journalSlice = createSlice({
       });
       state.messageSaved = `${ action.payload.title } updated successfully`;
     },
-    startUploadingFiles: ( state, action ) => {
-      const images = JSON.stringify( action.payload );
-      console.log( images );
-    },
     deleteNoteById: ( state, action ) => {},
   },
 });
 
 export const {
   savingNewNote, addNewEmptyNote, setActiveNote, setNotes,
-  setSaving, updateNote, startUploadingFiles, deleteNoteById,
+  setSaving, updateNote, deleteNoteById,
 } = journalSlice.actions;
