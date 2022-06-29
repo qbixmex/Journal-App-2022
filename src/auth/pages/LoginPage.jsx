@@ -8,7 +8,7 @@ import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
 import { startLoginWithEmailAndPassword, startGoogleSignIn } from '../../store/auth';
 
-const initialState = { email: '', password: '' };
+const formData = { email: '', password: '' };
 
 const formValidations = {
   email: [
@@ -31,7 +31,7 @@ export const LoginPage = () => {
   const {
     email, password, onInputChange,
     isFormValid, emailValid, passwordValid
-  } = useForm( initialState, formValidations );
+  } = useForm( formData, formValidations );
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
