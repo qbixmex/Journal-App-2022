@@ -125,10 +125,7 @@ export const NoteView = () => {
         </Button>
       </Grid>
 
-      {
-        ( note.imageUrls ) &&
-          <ImageGallery images={ note.imageUrls } title={ note.title } />
-      }
+      { note.imageUrls && <ImageGallery title={ note.title } images={ note.imageUrls } /> }
 
     </Grid>
   );
