@@ -1,6 +1,11 @@
+/**
+ * Upload image to Cloudinary
+ * @param {File} file Image file
+ * @returns {string} Image Url
+ */
 export const fileUpload = async ( file ) => {
 
-  if (!file) throw new Error('File not found!');
+  if (!file) return null;
 
   const cloudUrl = 'https://api.cloudinary.com/v1_1/qbixmex/upload';
 
@@ -24,7 +29,6 @@ export const fileUpload = async ( file ) => {
 
   } catch( error ) {
 
-    console.error( 'error' );
     throw new Error( error.message );
 
   }
