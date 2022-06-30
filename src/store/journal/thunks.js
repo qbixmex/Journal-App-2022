@@ -24,7 +24,7 @@ export const startNewNote = () => {
     const newDoc = doc( collection( FirebaseDB, `${uid}/journal/notes` ) );
 
     // Save firestore document
-    const setDocResponse = await setDoc( newDoc, newNote );
+    await setDoc( newDoc, newNote );
 
     // Set Id property to newNote object
     newNote.id = newDoc.id;
