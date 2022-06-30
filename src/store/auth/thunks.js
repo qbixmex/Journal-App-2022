@@ -7,15 +7,8 @@ import {
 import { clearNotesLogout } from "../journal";
 import { login, logout, checkingCredentials } from "./";
 
-/**
- * Launch Checking Credential Redux Action.
- * @param {string} email User Email
- * @param {string} password User Password
- * @returns {Promise<void>} Dispatch Checking Credentials Action.
- */
-export const checkingAuthentication = ( email, password ) => {
+export const checkingAuthentication = () => {
   return async ( dispatch ) => {
-    // Checking Google Credentials
     dispatch( checkingCredentials() );
   }
 };
