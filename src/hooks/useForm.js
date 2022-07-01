@@ -11,7 +11,7 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
 
   // This effect change Note View if initialForm change
   useEffect(() => {
-    setFormState(initialForm)
+    setFormState(initialForm);
   }, [ initialForm ]);
 
   const isFormValid = useMemo(() => {
@@ -21,7 +21,8 @@ export const useForm = (initialForm = {}, formValidations = {}) => {
     return true;
   }, [ formValidation ]);
 
-  const onInputChange = ({ target: { name = '', value = '' } }) => {
+  const onInputChange = (event) => {
+    const { target: { name = '', value = '' } } = event;
     setFormState({ ...formState, [name]: value });
   };
 

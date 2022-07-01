@@ -6,7 +6,7 @@ import Google from "@mui/icons-material/Google";
 
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
-import { startLoginWithEmailAndPassword, startGoogleSignIn } from '../../store/auth';
+import { startLoginWithEmailAndPassword, startGoogleSignIn } from '../../store/auth/thunks';
 
 const formData = { email: '', password: '' };
 
@@ -48,11 +48,12 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title="Login">
-      <form onSubmit={ onSubmit }>
+      <form id="submit-form" onSubmit={ onSubmit }>
         <Grid container>
 
           <Grid item xs={ 12 } mb={ 2 }>
             <TextField
+              id="email"
               name="email"
               label="email"
               type="email"
@@ -68,6 +69,7 @@ export const LoginPage = () => {
 
           <Grid item xs={ 12 } mb={ 2 }>
             <TextField
+              id="password"
               name="password"
               label="password"
               type="password"
@@ -92,6 +94,7 @@ export const LoginPage = () => {
 
             <Grid item xs={ 12 } sm={ 6 }>
               <Button
+                id="login-button"
                 disabled={ isCheckingAuthentication }
                 type='submit'
                 variant='contained'
@@ -103,6 +106,7 @@ export const LoginPage = () => {
 
             <Grid item xs={ 12 } sm={ 6 }>
               <Button
+                id="google-button"
                 disabled={ isCheckingAuthentication }
                 variant='contained'
                 fullWidth
