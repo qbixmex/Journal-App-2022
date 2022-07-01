@@ -1,10 +1,10 @@
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { fileUpload, loadNotes } from "../../helpers";
 import {
   addNewEmptyNote, savingNewNote, setActiveNote, setNotes,
   setSaving, updateNote, setPhotosToActiveNote, deleteNoteById
-} from "./";
+} from "./JournalSlice";
+import { fileUpload, loadNotes } from "../../helpers";
 
 export const startNewNote = () => {
   return async ( dispatch, getState ) => {
