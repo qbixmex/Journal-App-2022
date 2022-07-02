@@ -47,15 +47,16 @@ export const RegisterPage = () => {
     setFormSubmitted(true);
     if ( !isFormValid ) return;
     dispatch( startCreatingUserWithEmailAndPassword(formState) );
-  }
+  };
 
   return (
     <AuthLayout title="Register">
-      <form onSubmit={ onSubmit }>
+      <form id="register-form" onSubmit={ onSubmit }>
         <Grid container>
 
           <Grid item xs={ 12 } mb={ 2 }>
             <TextField
+              id="display-name"
               name="displayName"
               label="Full Name"
               type="text"
@@ -71,6 +72,7 @@ export const RegisterPage = () => {
 
           <Grid item xs={ 12 } mb={ 2 }>
             <TextField
+              id="email"
               name="email"
               label="Email"
               type="email"
@@ -86,6 +88,7 @@ export const RegisterPage = () => {
 
           <Grid item xs={ 12 } mb={ 2 }>
             <TextField
+              id='password'
               name="password"
               label="Password"
               type="password"
@@ -108,13 +111,12 @@ export const RegisterPage = () => {
 
             <Grid item xs={ 12 }>
               <Button
+                id='register-button'
                 disabled={ isCheckingAuthentication }
                 type='submit'
                 variant='contained'
                 fullWidth
-              >
-                Register
-              </Button>
+              >Register</Button>
             </Grid>
 
           </Grid>

@@ -39,7 +39,6 @@ export const startGoogleSignIn = () => {
   }
 };
 
-
 export const startCreatingUserWithEmailAndPassword = ({ displayName, email, password }) => {
   return async ( dispatch ) => {
 
